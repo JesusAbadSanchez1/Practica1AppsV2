@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Noticias por Categoría</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Segmento para seleccionar la categoría -->
+  <ion-segment (ionChange)="segmentChanged($event)" value="{{ selectedCategory }}">
+    <ion-segment-button *ngFor="let category of categories" [value]="category">
+      <ion-label>{{ category | titlecase }}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Mostrar mensaje si no hay artículos -->
+  <ion-row *ngIf="articles.length === 0">
+    <ion-col>
+      <ion-text color="medium">
+        <h3 class="ion-text-center">No hay artículos disponibles en esta categoría</h3>
+      </ion-text>
+    </ion-col>
+  </ion-row>
+
+  <!-- Componente para mostrar la lista de artículos -->
+  <app-articles [articles]="articles"></app-articles>
+</ion-content>
+
